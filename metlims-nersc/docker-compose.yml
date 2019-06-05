@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  app:
+    image: mamelara/labkey-app # Uses my image but should use a JGI image
+    ports:
+      - "8080:8080"
+    links:
+      - "db:database"
+  db:
+    image: postgres:10
+    stdin_open: true
+    tty: true
+    volumes:
+      - db.Postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "mypassword"
+      POSTGRES_DB: "labkey"
+    ports:
+      - "5432:5432"
+volumes:
+  db.Postgres:
