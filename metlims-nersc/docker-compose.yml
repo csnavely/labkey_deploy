@@ -1,23 +1,75 @@
 version: '2'
 
 services:
-  app:
-    image: mamelara/labkey-app # Uses my image but should use a JGI image
-    ports:
-      - "8080:8080"
-    links:
-      - "db:database"
-  db:
-    image: postgres:10
-    stdin_open: true
-    tty: true
-    volumes:
-      - db.Postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "mypassword"
-      POSTGRES_DB: "labkey"
-    ports:
-      - "5432:5432"
+    app:
+      image: mamelara/labkey-app # Uses my image but should use a JGI image
+      ports:
+        - "8080:8080"
+      links:
+        - "db:database"
+  
+    db:
+        # versions 9.6 and 9 are also available
+        image: postgres:10-alpine
+        #image: postgres:9.6-alpine
+        #image: postgres:9-alpine
+
+        # uncomment only if access outside of Spin is needed
+        #ports:
+        #    - 5432:5432/tcp
+
+        stdin_open: true
+        tty: true
+
+        volumes:
+            - db.Postgres:/var/lib/postgresql/data
+
+        environment:
+            POSTGRES_USER: PostgresUser
+            POSTGRES_PASSWORD: 'pppp'
+            TZ: US/Pacific
+
+        cap_drop:
+            - ALL
+        cap_add:
+            - CHOWN
+            - DAC_OVERRIDE
+            - FOWNER
+            - SETGID
+            - SETUID
+
+        secrets:
+            - mode: '0444'
+              uid: '0'
+              gid: '0'
+              source: db.Postgres.postgres_password
+              target: postgres_password
+
+        # uncomment to set configuration options as needed
+        # (this is cleaner than creating your own image with a custom config file)
+        #command:
+        #    - postgres
+        #    - -c
+        #    - max_connections=100
+        #    - -c
+        #    - shared_buffers=32MB
+
+        labels:
+
+            # prevent running stale (cached) image on restart or upgrade
+            io.rancher.container.pull_image: always
+
+   #
+# note: secrets and volumes must have been created manually
+#
+
+secrets:
+    db.Postgres.postgres_password:
+        external: true
+
 volumes:
-  db.Postgres:
+    db.Postgres:
+        driver: rancher-nfs
+        external: true
+
+
