@@ -16,23 +16,21 @@ https://www.labkey.org/Documentation/wiki-page.view?name=installComponents#folde
 # Overall Setup
 
 ## app
+This is the LabKey Server with Apache Tomcat. Several LabKey community edition
+files are needed from the tarball. The following files are copied into the 
+container:
+- labkeywebapp
+- modules
+- pipeline-lib
+- labkey.xml
+- tomcat-lib
 
-This is the LabKey Server
+They should be present in the same directory as the Dockerfile so that the
+copies work. 
 
 
 ## db
+At the moment is empty since we are using the base postgres:10 image.
 
-This is the PostGresSQL service
-
-## web
-
-This is the Apache/Tomcat
-
-## volume1
-
-This is interactive I/O to the SPIN GPFS path
-
-## volume2
-
-This is the ro mount of historical data on /project (or CSCRATCH or projectb)
-
+# docker-compose.yml
+This runs and connects the LabKey server with the Postgres database container.
