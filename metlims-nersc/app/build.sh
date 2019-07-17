@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SPIN_USER="bpb"
+SPIN_USER="bpb20"
 CONTAINER_NAME="metatlas_lims-app"
 VERSION=`date "+%Y-%m-%d-%H-%M"`
 echo "$VERSION"
