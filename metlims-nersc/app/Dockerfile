@@ -1,4 +1,4 @@
-FROM tomcat:9
+FROM tomcat:9.0.22-jdk13-openjdk-oracle
 
 ####### Environment variables from tomcat and their paths
 # CATALINA_BASE:   /usr/local/tomcat

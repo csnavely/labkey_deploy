@@ -2,21 +2,27 @@ version: '2'
 
 services:
   app:
-    image: mamelara/labkey-app # Uses my image but should use a JGI image
+    image: registry.spin.nersc.gov/bpb20/labkey-app:2019-07-17
     ports:
-      - "8080:8080"
+      - "50033:8080"
+      - "587:587"
     links:
       - "db:database"
+    volumes:
+      - /project/projectdirs/metatlas:/project_metatlas:ro
+      - /projectb/sandbox/metatlas:projectb_metatlas:ro
   db:
     image: postgres:10
     stdin_open: true
     tty: true
     volumes:
       - db.Postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "mypassword"
-      POSTGRES_DB: "labkey"
+    env-file:
+      - postgres.env
+#    environment:
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "mypassword"
+#      POSTGRES_DB: "labkey"
     ports:
       - "5432:5432"
 volumes:
