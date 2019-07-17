@@ -16,7 +16,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - db.Postgres:/var/lib/postgresql/data
+      - db.metlims-nersc:/var/lib/postgresql/data
     env-file:
       - postgres.env
 #    environment:
@@ -26,5 +26,5 @@ services:
     ports:
       - "5432:5432"
 volumes:
-  db.Postgres:
+  db.metlims-nersc:
     driver: rancher-nfs
