@@ -22,10 +22,10 @@ services:
         uid: '0'
         gid: '0'
         source: db.metlims-nersc.postgres_password
-#    environment:
-#      POSTGRES_USER: "postgres"
-#      POSTGRES_PASSWORD: "mypassword"
-#      POSTGRES_DB: "labkey"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: "labkey"
     ports:
       - "5432:5432"
 volumes:
