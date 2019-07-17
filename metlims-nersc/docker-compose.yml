@@ -17,8 +17,11 @@ services:
     tty: true
     volumes:
       - db.metlims-nersc:/var/lib/postgresql/data
-    env-file:
-      - postgres.env
+    secrets:
+      - mode: '0444'
+        uid: '0'
+        gid: '0'
+        source: db.metlims-nersc.postgres_password
 #    environment:
 #      POSTGRES_USER: "postgres"
 #      POSTGRES_PASSWORD: "mypassword"
@@ -28,3 +31,7 @@ services:
 volumes:
   db.metlims-nersc:
     driver: rancher-nfs
+
+secrets:
+  db.metlims-nersc.postgres_password:
+    external: true
