@@ -23,7 +23,7 @@ services:
         source: db.metlims-nersc.postgres_password
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: /run/secrets/db.metlims-nersc.postgres_password
+      POSTGRES_PASSWORD_FILE: /run/secrets/db.metlims-nersc.postgres_password
       POSTGRES_DB: "labkey"
     ports:
       - "5434:5434"
