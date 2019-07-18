@@ -2,7 +2,7 @@ version: '2'
 
 services:
   app:
-    image: registry.spin.nersc.gov/bpb20/metatlas_lims-app:2019-07-17-19-59
+    image: registry.spin.nersc.gov/bpb20/metatlas_lims-app:2019-07-18-13-55
     ports:
       - "60023:8080"
       - "587:587"
@@ -11,7 +11,7 @@ services:
     cap_drop:
         - ALL
   db:
-    image: postgres:10
+    image: postgres:12
     stdin_open: true
     tty: true
     volumes:
@@ -20,13 +20,13 @@ services:
       - mode: '0444'
         uid: '55710'
         gid: '55710'
-        source: db.metlims-nersc.postgres_password
+        source: db.metlims-nersc.postgres_password2
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD_FILE: /run/secrets/db.metlims-nersc.postgres_password
+      POSTGRES_PASSWORD_FILE: /run/secrets/db.metlims-nersc.postgres_password2
       POSTGRES_DB: "labkey"
     ports:
-      - "5434:5434"
+      - "5432:5432"
     cap_drop:
         - ALL
     cap_add:
@@ -40,6 +40,6 @@ volumes:
   db.metlims-nersc:
     driver: rancher-nfs
 secrets:
-  db.metlims-nersc.postgres_password:
+  db.metlims-nersc.postgres_password2:
     external: true
 
