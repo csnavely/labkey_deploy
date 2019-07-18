@@ -5,19 +5,14 @@ services:
     image: registry.spin.nersc.gov/bpb20/metatlas_lims-app:2019-07-17-19-59
     ports:
       - "60023:8080"
-    #  - "587:587"
+      - "587:587"
     links:
       - "db:database"
-    #volumes:
-    #  - /global/project/projectdirs/metatlas:/project_metatlas:ro
-    #  - /global/projectb/sandbox/metatlas:projectb_metatlas:ro
     cap_drop:
         - ALL
   db:
     image: postgres:10
     stdin_open: true
-    entrypoint:
-        - /bin/bash
     tty: true
     volumes:
       - db.metlims-nersc:/var/lib/postgresql/data
@@ -31,7 +26,7 @@ services:
       POSTGRES_PASSWORD: /run/secrets/db.metlims-nersc.postgres_password
       POSTGRES_DB: "labkey"
     ports:
-      - "5432:5432"
+      - "5434:5434"
     cap_drop:
         - ALL
     cap_add:
@@ -44,7 +39,6 @@ services:
 volumes:
   db.metlims-nersc:
     driver: rancher-nfs
-
 secrets:
   db.metlims-nersc.postgres_password:
     external: true
