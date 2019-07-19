@@ -16,11 +16,37 @@
         validationQuery="SELECT 1"
         />
 
+<!--     <Resource name="mail/Session" auth="Container" 
+        type="javax.mail.Session" 
+        mail.smtp.host="smtp.lbl.gov" 
+        mail.smtp.user="do_not_reply@lbl.gov"
+        mail.smtp.from="do_not_reply@lbl.gov"
+        mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
+        mail.smtp.auth="false"
+        mail.smtp.port="465"/>  -->
+
+<!--     <Resource name="mail/Session" auth="Container" 
+        type="javax.mail.Session" 
+        mail.smtp.host="smtp.lbl.gov" 
+        mail.smtp.user="do_not_reply@lbl.gov"
+        mail.smtp.from="do_not_reply@lbl.gov"
+        mail.smtp.starttls.enable="true"
+        mail.smtp.auth="false"
+        mail.smtp.port="587"/>  -->
+<!-- 
+    <Resource name="mail/Session" auth="Container" 
+        type="javax.mail.Session" 
+        mail.smtp.host="smtp.lbl.gov" 
+        mail.smtp.user="do_not_reply@lbl.gov" 
+        mail.smtp.from="do_not_reply@lbl.gov" 
+        mail.smtp.starttls.enable="true" 
+        mail.smtp.auth="false" 
+        mail.smtp.port="25"/>  -->
+
     <Resource name="mail/Session" auth="Container"
         type="javax.mail.Session"
         mail.smtp.host="smtp.lbl.gov"
-        mail.smtp.user="bpbowen@lbl.gov"
-        mail.smtp.port="465"/>
+        mail.smtp.port="25"/>
 
     <Resources cachingAllowed="true" cacheMaxSize="20000" />
 
