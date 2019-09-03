@@ -2,10 +2,12 @@ version: '2'
 
 services:
   app:
-    image: registry.spin.nersc.gov/bpb20/metatlas_lims-app:2019-07-18-13-55
+    image: registry.spin.nersc.gov/bpb20/metatlas_lims-app:2019-07-18-20-03
     ports:
       - "60023:8080"
       - "587:587"
+      - "465:465"
+      - "25:25"
     links:
       - "db:database"
     cap_drop:
