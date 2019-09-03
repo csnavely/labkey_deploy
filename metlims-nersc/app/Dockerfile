@@ -19,4 +19,5 @@ COPY modules /usr/local/labkey/modules
 COPY pipeline-lib /usr/local/labkey/pipeline-lib
 
 # Move the LabKey Server Configuration File
-COPY labkey.xml /usr/local/tomcat/conf/Catalina/localhost/
+#COPY labkey.xml /usr/local/tomcat/conf/Catalina/localhost/
+COPY ROOT.xml /usr/local/tomcat/conf/Catalina/localhost/
